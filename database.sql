@@ -4,6 +4,18 @@
 -- after importing, run setup.php ONCE in a browser to create the seed admin
 -- account (placeholder password, forced to change on first login — see README.md),
 -- then DELETE setup.php. Do not leave setup.php on a live site.
+--
+-- UPGRADE NOTE (existing live databases): the users table gained
+-- phone, city, service_needed, project_detail and budget_range columns,
+-- services gained a slug column, and a messages table was added.
+-- For an existing database, run these before importing new code:
+--   ALTER TABLE users ADD COLUMN phone VARCHAR(50) NULL AFTER email;
+--   ALTER TABLE users ADD COLUMN city VARCHAR(100) NULL AFTER phone;
+--   ALTER TABLE users ADD COLUMN service_needed VARCHAR(150) NULL AFTER city;
+--   ALTER TABLE users ADD COLUMN project_detail TEXT NULL AFTER service_needed;
+--   ALTER TABLE users ADD COLUMN budget_range VARCHAR(100) NULL AFTER project_detail;
+--   ALTER TABLE services ADD COLUMN slug VARCHAR(100) NULL AFTER title;
+--   (Then import/create the messages table below, and update service slugs.)
 
 CREATE DATABASE IF NOT EXISTS umer_website CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE umer_website;
@@ -12,6 +24,11 @@ CREATE TABLE IF NOT EXISTS users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
+    phone VARCHAR(50) NULL,
+    city VARCHAR(100) NULL,
+    service_needed VARCHAR(150) NULL,
+    project_detail TEXT NULL,
+    budget_range VARCHAR(100) NULL,
     password_hash VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -39,6 +56,7 @@ CREATE TABLE IF NOT EXISTS clients (
 CREATE TABLE IF NOT EXISTS services (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
+    slug VARCHAR(100) NULL,
     description TEXT,
     is_active TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -54,10 +72,27 @@ CREATE TABLE IF NOT EXISTS inquiries (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Admin <-> user messaging portal. sender_role is 'admin' or 'user';
+-- user_id is the registered user the conversation belongs to.
+-- Admin replies to an inquiry are also stored here when the inquiry
+-- email matches a registered user, so they appear in that user's portal.
+CREATE TABLE IF NOT EXISTS messages (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    sender_role VARCHAR(20) NOT NULL,
+    message TEXT NOT NULL,
+    inquiry_id INT UNSIGNED NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_messages_user (user_id)
+);
+
 -- Starter service rows (shown on the front-end if the DB is connected).
-INSERT INTO services (title, description) VALUES
-('Website Building and Fixing', 'Personal and business websites, built folder-wise and fixed on existing sites.'),
-('Video Editing', 'Short-form and cinematic video editing from your own clips.'),
-('Voiceover', 'Natural voiceover in English and Urdu for videos and shorts.'),
-('Scripts', 'Video scripts, captions and story ideas for social media.'),
-('Social Media Posts and Management', 'Posts, captions, hashtags and posting plans for Facebook, Instagram and YouTube.');
+INSERT INTO services (title, slug, description) VALUES
+('Website Design', 'website-design', 'Modern, fast, mobile-friendly personal and business websites, built folder-wise.'),
+('Website Fixing & Maintenance', 'website-fixing', 'Fix errors, broken pages and slow sites — and keep an existing site running smoothly.'),
+('Video Editing', 'video-editing', 'Short-form and cinematic edits from your own clips — clean cuts, text and music.'),
+('Voiceover & Scripts', 'voiceover-scripts', 'Natural voiceover in English and Urdu, plus scripts, captions and story ideas.'),
+('Social Media Management', 'social-media-management', 'Posts, captions, hashtags and posting plans for Facebook, Instagram and YouTube.'),
+('Logo & Thumbnail Design', 'logo-thumbnail', 'Clean logos and eye-catching thumbnails that make your page instantly recognisable.'),
+('SEO & AdSense Setup', 'seo-adsense', 'Make your site search-friendly and ready for AdSense — setup only, approval is never guaranteed.'),
+('Content Writing', 'content-writing', 'Clear, positive writing for websites, pages and videos — in simple, readable language.');
