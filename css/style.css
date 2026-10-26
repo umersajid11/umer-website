@@ -293,3 +293,69 @@ td:nth-child(2) { color: var(--text); font-weight: 700; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------- Upgrade: header photo, hero slider, new panels ---------- */
+.header-brand { display: flex; align-items: center; gap: 0.7rem; }
+.header-photo { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); box-shadow: var(--shadow-sm); }
+header nav a.nav-cta { background: var(--accent); color: #1a1a1a; }
+header nav a.nav-cta:hover { background: var(--accent-soft); color: #1a1a1a; }
+.footer-admin { font-size: 0.85rem; opacity: 0.75; }
+.footer-admin a { color: var(--muted-2); text-decoration: none; }
+.muted { color: var(--muted); }
+.hero-credentials { font-weight: 700; color: var(--accent-soft); }
+.profile-photo { display: flex; justify-content: center; margin-bottom: 0.5rem; }
+.profile-photo img { width: 190px; height: 190px; object-fit: cover; border-radius: 50%; padding: 6px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border: 3px solid transparent; box-shadow: var(--shadow); background-clip: padding-box; }
+.profile-placeholder { width: 190px; height: 190px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--card-2), var(--card)); border: 3px solid var(--accent); box-shadow: var(--shadow); }
+.motivation { font-style: italic; color: var(--accent-soft); border-left: 4px solid var(--accent); padding-left: 1rem; max-width: 640px; margin: 1.25rem auto; text-align: left; }
+/* Hero slider: CSS gradients + icons only for slides 2-3 — no fake photos. */
+.hero-slider { position: relative; max-width: 760px; margin: 0 auto 1.5rem; background: rgba(27, 31, 61, 0.65); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem 3.2rem 2.6rem; box-shadow: var(--shadow); overflow: hidden; }
+.hero-slide { display: none; align-items: center; gap: 1.5rem; text-align: left; }
+.hero-slide.is-active { display: flex; }
+.hero-slide .profile-photo { margin-bottom: 0; flex-shrink: 0; }
+.hero-slide .profile-photo img, .hero-slide .profile-placeholder { width: 170px; height: 170px; }
+.slide-visual { width: 170px; height: 170px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3.2rem; box-shadow: var(--shadow); }
+.slide-visual-web { background: linear-gradient(135deg, #1b3a6b, #6c9bff); }
+.slide-visual-video { background: linear-gradient(135deg, #5c2a00, #ffb347); }
+.slide-title { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 0 0 0.3rem; }
+.slide-sub { font-weight: 700; color: var(--accent-soft); margin: 0 0 0.4rem; }
+.slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: var(--card-2); color: var(--text); font-size: 1.6rem; cursor: pointer; line-height: 1; z-index: 2; }
+.slide-prev { left: 0.6rem; } .slide-next { right: 0.6rem; }
+.slide-dots { position: absolute; bottom: 0.8rem; left: 0; right: 0; display: flex; gap: 0.5rem; justify-content: center; }
+.slide-dot { width: 12px; height: 12px; border-radius: 50%; border: none; background: var(--border); cursor: pointer; padding: 0; }
+.slide-dot.is-active { background: var(--accent); width: 28px; border-radius: 999px; }
+/* Auth card, stats, bars, badges, chat, products, service detail */
+.auth-wrap { max-width: 560px; }
+.auth-card { background: linear-gradient(180deg, var(--card), #181c39); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow); }
+.stat-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.stat-card { text-align: center; }
+.stat-num { font-size: 2.4rem; font-weight: 800; color: var(--accent); display: block; }
+.bar { height: 12px; background: var(--bg-2); border-radius: 999px; overflow: hidden; margin: 0.2rem 0 1rem; }
+.bar-fill { height: 100%; background: var(--accent); }
+.bar-blue { background: var(--accent2); }
+.badge { display: inline-block; padding: 0.15rem 0.7rem; border-radius: 999px; font-size: 0.85rem; font-weight: 700; background: var(--card-2); color: var(--text); }
+.badge-contacted { background: #244a6b; } .badge-done { background: #1f5c3d; } .badge-new { background: #5c4a00; }
+.chat { display: flex; flex-direction: column; gap: 0.8rem; margin: 1rem 0; }
+.chat-msg { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; max-width: 85%; }
+.chat-msg p { margin: 0.3rem 0 0; color: var(--text); }
+.from-admin { align-self: flex-start; border-left: 4px solid var(--accent2); }
+.from-user { align-self: flex-end; border-right: 4px solid var(--accent); text-align: right; }
+.product-card { border-top-color: var(--accent); }
+.btn-small { padding: 0.5rem 1rem; font-size: 0.9rem; }
+.btn-outline { background: transparent; color: var(--text); border-color: var(--border); box-shadow: none; }
+.service-detail { text-align: center; }
+.service-detail h2, .service-detail .checklist { text-align: left; max-width: 640px; margin-left: auto; margin-right: auto; }
+.service-icon { font-size: 3.5rem; margin: 0; }
+.service-lead { font-size: 1.15rem; color: var(--muted); }
+.checklist { list-style: none; padding: 0; }
+.checklist li { padding: 0.4rem 0 0.4rem 1.8rem; position: relative; }
+.checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
+form select { width: 100%; padding: 0.85rem 1rem; margin: 0.4rem 0 1.1rem; border-radius: 12px; border: 1px solid #555a9e; background: #12142b; color: var(--text); font: inherit; }
+@media (max-width: 720px) {
+  .hero-slider { padding: 1.2rem 1rem 2.6rem; }
+  .hero-slide, .hero-slide.is-active { flex-direction: column; text-align: center; }
+  .hero-slide .profile-photo img, .hero-slide .profile-placeholder, .slide-visual { width: 140px; height: 140px; }
+  .slide-arrow { top: 4.5rem; }
+  .chat-msg { max-width: 95%; }
+}
+.slide-image { width: 300px; height: 190px; flex-shrink: 0; object-fit: cover; border-radius: 16px; box-shadow: var(--shadow); }
+@media (max-width: 720px) { .slide-image { width: 100%; height: 180px; } }
