@@ -25,8 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Admin Login — Umer Sajid</title><link rel="stylesheet" href="../css/style.css"></head>
 <body>
 <header><strong>Umer Sajid</strong><nav><a href="../index.php">Home</a></nav></header>
-<section>
+<section class="auth-wrap">
+  <div class="auth-card">
   <h1>Admin Login</h1>
+  <p class="muted">Site owner only. Clients, please use the User Panel from the home page.</p>
   <?php if ($error): ?><p class="notice"><?php echo htmlspecialchars($error); ?></p><?php endif; ?>
   <?php if (!$db): ?><p class="notice">Database not connected yet.</p><?php endif; ?>
   <form method="post">
@@ -35,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button class="btn" type="submit">Log in</button>
   </form>
   <p>First time? Run <a href="../setup.php">setup.php</a> once, then change the placeholder password on first login — and delete setup.php afterwards.</p>
+  </div>
 </section>
 </body>
 </html>
