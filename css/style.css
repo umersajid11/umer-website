@@ -1,0 +1,295 @@
+/* ------------------------------------------------------------------
+   Umer Sajid — one consistent theme for every page
+   Dark, warm, modern. System fonts only, no external requests,
+   no heavy libraries — safe for free hosting (InfinityFree/cPanel).
+   PHP logic, database.sql and folder layout are untouched.
+   ------------------------------------------------------------------ */
+:root {
+  --bg: #0f1226;
+  --bg-2: #141838;
+  --card: #1b1f3d;
+  --card-2: #222753;
+  --border: #33376e;
+  --border-soft: #2a2e5c;
+  --accent: #ffb347;
+  --accent-soft: #ffd9a0;
+  --accent2: #6c9bff;
+  --text: #f4f4f8;
+  --muted: #c9c9dd;
+  --muted-2: #9a9cc0;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --radius: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-soft); }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--accent2);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* ---------- Header / navigation (all pages) ---------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.9rem 2rem;
+  background: rgba(15, 18, 38, 0.92);
+  border-bottom: 1px solid var(--border-soft);
+  backdrop-filter: blur(8px);
+}
+header strong { font-size: 1.15rem; letter-spacing: 0.2px; white-space: nowrap; }
+header nav { display: flex; flex-wrap: wrap; gap: 0.25rem; align-items: center; }
+header nav a {
+  margin-left: 0;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+header nav a:hover,
+header nav a.is-active { background: var(--card-2); color: var(--accent-soft); }
+
+/* ---------- Layout ---------- */
+main { display: block; }
+section {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+section h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+}
+section h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.25;
+  margin: 0 0 1rem;
+}
+section h2::before,
+section h1::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin-bottom: 0.9rem;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+section h1::after { margin: 0.9rem 0 0; }
+section > p { color: var(--muted); max-width: 720px; }
+footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem 3rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border-soft);
+  font-size: 0.95rem;
+}
+
+/* ---------- Hero (front page) ---------- */
+.hero {
+  perspective: 1000px;
+  text-align: center;
+  padding: 5rem 1.5rem 3.5rem;
+  background:
+    radial-gradient(circle at 50% 12%, #2a2f6b 0%, transparent 60%),
+    radial-gradient(circle at 85% 90%, rgba(108, 155, 255, 0.22) 0%, transparent 45%),
+    var(--bg);
+  border-bottom: 1px solid var(--border-soft);
+}
+.hero-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-out;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); margin: 0.6rem 0 0.5rem; line-height: 1.1; }
+.hero p { color: var(--muted); font-size: clamp(1.02rem, 2vw, 1.2rem); max-width: 680px; margin: 0.75rem auto; }
+.hero .tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #1a1a1a;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-pill);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  box-shadow: var(--shadow-sm);
+}
+.hero-cards {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2.25rem;
+}
+.hero-card {
+  background: linear-gradient(180deg, var(--card-2), var(--card));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.4rem;
+  font-weight: 700;
+  transform: translateZ(40px) rotateX(4deg);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Cards, grids, notices ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.1rem;
+  margin-top: 1.25rem;
+}
+.card {
+  background: linear-gradient(180deg, var(--card), #181c39);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent2);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: #4a50a0; }
+.card h3 { margin: 0 0 0.5rem; font-size: 1.15rem; line-height: 1.35; }
+.card p { margin: 0; color: var(--muted); }
+
+/* Friendly first-card accent for the user panel: keep it simple,
+   no extra markup needed — the grid already reads as three steps. */
+.notice {
+  background: #3a2a00;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  color: #ffe9c4;
+  max-width: 760px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #1a1a1a;
+  padding: 0.75rem 1.4rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: 0 10px 24px rgba(255, 179, 71, 0.25);
+}
+.btn:hover { background: var(--accent-soft); color: #1a1a1a; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.hero p .btn { margin: 0.35rem 0.3rem 0; }
+/* Second hero button reads as a calm outline button, not a duplicate CTA. */
+.hero p .btn:last-child { background: transparent; color: var(--text); border-color: var(--border); box-shadow: none; }
+.hero p .btn:last-child:hover { border-color: var(--accent); color: var(--accent-soft); }
+
+/* ---------- Forms (contact + both logins) ---------- */
+form { max-width: 640px; margin-top: 1.25rem; }
+form label { display: block; font-weight: 700; margin-bottom: 0.15rem; }
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  margin: 0.4rem 0 1.1rem;
+  border-radius: 12px;
+  border: 1px solid #555a9e;
+  background: #12142b;
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+form input:focus,
+form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.25);
+  outline: none;
+}
+form textarea { resize: vertical; min-height: 120px; }
+
+/* ---------- Tables (admin dashboard) ---------- */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.97rem;
+}
+th, td { text-align: left; padding: 0.8rem 1rem; border-bottom: 1px solid var(--border-soft); }
+th {
+  background: var(--card-2);
+  color: var(--text);
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: rgba(108, 155, 255, 0.08); }
+td { color: var(--muted); }
+td:nth-child(2) { color: var(--text); font-weight: 700; }
+
+/* ---------- Gentle reveal (JS adds .is-visible; content stays
+   fully readable if JS is off — see js/script.js) ---------- */
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  body { font-size: 16.5px; }
+  header { justify-content: center; text-align: center; padding: 0.9rem 1rem; }
+  header nav { justify-content: center; }
+  header nav a { padding: 0.4rem 0.7rem; font-size: 0.9rem; }
+  section { padding: 2.25rem 1.1rem; }
+  .hero { padding: 3.5rem 1.1rem 2.5rem; }
+  .hero-cards { flex-direction: column; align-items: stretch; }
+  .hero-card { text-align: center; }
+  .grid { grid-template-columns: 1fr; }
+  /* Wide admin tables scroll sideways instead of breaking the layout. */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  form .btn, .btn { width: 100%; text-align: center; }
+  .hero p .btn { width: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .js .reveal { opacity: 1; transform: none; }
+}
