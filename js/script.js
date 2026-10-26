@@ -85,3 +85,9 @@ document.addEventListener('DOMContentLoaded', function () {
   slider.addEventListener('focusout', start);
   start();
 })();
+
+// v3: chat boxes always open scrolled to the latest message.
+document.addEventListener('DOMContentLoaded', function () {
+  var box = document.getElementById('chatBox');
+  if (box) box.scrollTop = box.scrollHeight;
+});
