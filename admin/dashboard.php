@@ -135,12 +135,12 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
   </form>
   <?php if ($selectedUser && $selectedUserInfo): ?>
     <h3>Conversation with <?php echo htmlspecialchars($selectedUserInfo['name']); ?> (<?php echo htmlspecialchars($selectedUserInfo['email']); ?>)</h3>
-    <?php if (empty($messages)): ?><p>No messages yet.</p><?php else: ?>
-      <div class="chat">
+    <?php if (empty($messages)): ?><p class="chat-empty">No messages yet — start the conversation below. Your reply will appear here for both sides.</p><?php else: ?>
+      <div class="chat-box" id="chatBox">
         <?php foreach ($messages as $m): ?>
           <div class="chat-msg <?php echo $m['sender_role'] === 'admin' ? 'from-admin' : 'from-user'; ?>">
-            <strong><?php echo $m['sender_role'] === 'admin' ? 'You (Admin)' : 'User'; ?></strong>
-            <span class="muted"><?php echo htmlspecialchars($m['created_at']); ?></span>
+            <div class="chat-meta"><strong><?php echo $m['sender_role'] === 'admin' ? 'You (Admin)' : 'User'; ?></strong>
+            <span><?php echo htmlspecialchars($m['created_at']); ?></span></div>
             <p><?php echo nl2br(htmlspecialchars($m['message'])); ?></p>
           </div>
         <?php endforeach; ?>
@@ -148,7 +148,7 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
     <?php endif; ?>
     <form method="post" action="dashboard.php?user_id=<?php echo $selectedUser; ?>#messages">
       <input type="hidden" name="user_id" value="<?php echo $selectedUser; ?>">
-      <label>Your reply <textarea name="message" rows="3" required></textarea></label>
+      <label class="sr-only" for="chatInput">Your reply</label><textarea id="chatInput" name="message" rows="3" required></textarea>
       <button class="btn" type="submit" name="send_admin_message" value="1">Send Reply</button>
     </form>
   <?php endif; ?>
