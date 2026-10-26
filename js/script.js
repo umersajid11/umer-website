@@ -56,3 +56,32 @@ document.addEventListener('DOMContentLoaded', function () {
     sections.forEach(function (s) { navObserver.observe(s); });
   }
 });
+
+// 4) Hero slider — auto-advance, dots, arrows, pause on hover/focus.
+// No external code; if JS fails, slide 1 (owner photo) stays visible.
+(function () {
+  var slider = document.getElementById('heroSlider');
+  if (!slider) return;
+  var slides = slider.querySelectorAll('.hero-slide');
+  var dots = slider.querySelectorAll('.slide-dot');
+  var prev = slider.querySelector('.slide-prev');
+  var next = slider.querySelector('.slide-next');
+  if (slides.length < 2) return;
+  var current = 0, timer = null;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(i) {
+    current = (i + slides.length) % slides.length;
+    slides.forEach(function (s, j) { s.classList.toggle('is-active', j === current); });
+    dots.forEach(function (d, j) { d.classList.toggle('is-active', j === current); });
+  }
+  function start() { if (!reduced && !timer) timer = setInterval(function () { show(current + 1); }, 5000); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  if (prev) prev.addEventListener('click', function () { stop(); show(current - 1); start(); });
+  if (next) next.addEventListener('click', function () { stop(); show(current + 1); start(); });
+  dots.forEach(function (d) { d.addEventListener('click', function () { stop(); show(parseInt(d.getAttribute('data-slide'), 10) || 0); start(); }); });
+  slider.addEventListener('mouseenter', stop);
+  slider.addEventListener('mouseleave', start);
+  slider.addEventListener('focusin', stop);
+  slider.addEventListener('focusout', start);
+  start();
+})();
