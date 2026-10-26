@@ -1,3 +1,35 @@
+# Umer Sajid — Personal Dynamic Website (v3 portfolio fix, local only — NOT deployed)
+
+## What is new in v3
+- **Slider overflow fixed:** the header slider is now a fixed-height, fully
+  contained box (`width: 100%`, `height: clamp(280px, 46vw, 460px)`,
+  `overflow: hidden`, images `object-fit: cover`), with `overflow-x: hidden`
+  on the whole page — images can no longer spill outside. Same 3 AI/tech
+  slider images, auto-advance, dots/arrows, mobile height 260px.
+- **Professional profile photo:** `images/profile.jpg` is now the generated
+  professional portrait (same person, dark suit + tie, 1600×1600 JPEG),
+  displayed CENTRED as a rounded rectangle (280×340px, 24px corners,
+  gold border, shadow) directly below the slider, then the intro below it:
+  Umer Sajid, MS in Software Engineering, One-year diploma from China,
+  motivational line. No circle crop any more.
+- **All services always listed:** the front page now merges DB services
+  into the 8-service catalogue (`backend/services.php`), so all 8 show
+  even though the DB services table only has 5 rows: Website Design,
+  Website Fixing & Maintenance, Video Editing, Voiceover & Scripts,
+  Social Media Management, Logo & Thumbnail Design, SEO & AdSense Setup,
+  Content Writing — each card links to `service.php?slug=...`.
+- **Portfolio sections added:** Skills chips and a 4-step "How I Work"
+  process section, plus cleaner spacing/typography; sticky nav now has
+  About / Skills / Services / Process / Contact / User Panel, footer
+  Admin link only.
+- **Chat UI rebuilt (admin + user):** scrollable chat box (440px, latest
+  message at bottom via JS auto-scroll), coloured bubbles — admin blue
+  left, user amber right — with name + timestamp meta row, empty state,
+  and a clear Send input. Message-table logic (`backend/messages.php`)
+  is unchanged.
+- Social links and credentials unchanged. PHP/MySQL logic, auth,
+  messaging and dashboards are otherwise intact.
+
 # Umer Sajid — Personal Dynamic Website (v2 upgrade)
 
 ## What is new in v2 (all in this folder, NOT deployed by this build)

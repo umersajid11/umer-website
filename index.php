@@ -6,11 +6,24 @@ $services = [];
 if ($db) {
     try { $services = $db->query("SELECT title, slug, description FROM services WHERE is_active = 1 ORDER BY id")->fetchAll(); } catch (Throwable $e) { $services = []; }
 }
-if (empty($services)) {
-    foreach (service_catalogue() as $slug => $s) {
-        $services[] = ['title' => $s['title'], 'slug' => $slug, 'description' => $s['short']];
+// v3: always show ALL 8 catalogue services. DB rows overlay catalogue
+// titles/descriptions where they match by slug, so nothing is ever
+// hidden just because the services table only has 5 rows.
+$merged = [];
+foreach (service_catalogue() as $slug => $s) {
+    $merged[$slug] = ['title' => $s['title'], 'slug' => $slug, 'description' => $s['short'], 'icon' => $s['icon']];
+}
+foreach ($services as $row) {
+    $slug = $row['slug'] ?? '';
+    if (!$slug) { $f = find_service($row['title']); $slug = $f['slug'] ?? ''; }
+    if ($slug && isset($merged[$slug])) {
+        $merged[$slug]['title'] = $row['title'] ?: $merged[$slug]['title'];
+        $merged[$slug]['description'] = $row['description'] ?: $merged[$slug]['description'];
+    } elseif (!empty($row['title'])) {
+        $merged[$slug ?: $row['title']] = ['title' => $row['title'], 'slug' => $slug, 'description' => $row['description'] ?? '', 'icon' => '✦'];
     }
 }
+$services = array_values($merged);
 $preselected = trim($_GET['service'] ?? '');
 $profilePhoto = 'images/profile.jpg'; // Owner's Facebook profile DP (150x150, low-res — replace with a higher-res photo when sent; no code change needed).
 $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
@@ -30,7 +43,9 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
   </div>
   <nav>
     <a href="#about">About</a>
+    <a href="#skills">Skills</a>
     <a href="#services">Services</a>
+    <a href="#process">Process</a>
     <a href="#contact">Contact</a>
     <a href="user/login.php" class="nav-cta">User Panel</a>
   </nav>
@@ -74,7 +89,8 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
       </div>
       <?php if ($hasPhoto): ?>
       <div class="profile-photo">
-        <img src="<?php echo htmlspecialchars($profilePhoto); ?>" alt="Umer Sajid — professional photo">
+        <img src="<?php echo htmlspecialchars($profilePhoto); ?>" alt="Umer Sajid — professional portrait in a dark suit">
+        <p class="profile-caption">Umer Sajid · Professional Portfolio</p>
       </div>
       <?php endif; ?>
       <span class="tag">Personal Portfolio</span>
@@ -118,12 +134,35 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
         $slug = $s['slug'] ?? '';
         if (!$slug) { $found = find_service($s['title']); $slug = $found['slug'] ?? ''; }
       ?>
-        <div class="card">
+        <div class="card service-card">
+          <p class="service-card-icon"><?php echo htmlspecialchars($s['icon'] ?? '✦'); ?></p>
           <h3><?php echo htmlspecialchars($s['title']); ?></h3>
           <p><?php echo htmlspecialchars($s['description']); ?></p>
           <?php if ($slug): ?><p><a href="service.php?slug=<?php echo urlencode($slug); ?>">View details →</a></p><?php endif; ?>
         </div>
       <?php endforeach; ?>
+    </div>
+  </section>
+
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <p class="section-lead">Tools and skills I use every day to deliver clean, professional work.</p>
+    <div class="skill-chips">
+      <span>Website Design</span><span>PHP &amp; MySQL</span><span>Video Editing</span>
+      <span>Voiceover (Urdu &amp; English)</span><span>Social Media</span><span>Logo &amp; Thumbnails</span>
+      <span>SEO Basics</span><span>Content Writing</span><span>AI Tools</span>
+    </div>
+  </section>
+
+  <section id="process">
+    <h2>How I Work</h2>
+    <p class="section-lead">A simple, honest process — no confusion, no hidden steps.</p>
+    <div class="grid steps-grid">
+      <div class="card"><h3>1 · Tell Me</h3><p>Send your idea through the contact form or your user panel, with as much detail as you can.</p></div>
+      <div class="card"><h3>2 · Plan</h3><p>I confirm the scope, price range and timeline before any work starts.</p></div>
+      <div class="card"><h3>3 · Build</h3><p>You get updates in your portal, and you can reply there at any time.</p></div>
+      <div class="card"><h3>4 · Deliver</h3><p>Final work is delivered, checked with you, and revised on the main message if needed.</p></div>
     </div>
   </section>
 
