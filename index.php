@@ -65,9 +65,8 @@ if (empty($services)) {
     <p>Hello, I am Umer Sajid, a student of MS in Software Engineering at the University of Azad Jammu and Kashmir (AJK), Muzaffarabad. I work on creative video content, voiceovers, and websites — always family-friendly and positive.</p>
     <p>
       <a href="https://linkedin.com/umersajid">LinkedIn</a> ·
-      <!-- Facebook and Instagram links below are PLACEHOLDERS — exact profile URLs are unverified. See README.md. -->
-      <a href="https://facebook.com/placeholder-umersajid">Facebook</a> ·
-      <a href="https://instagram.com/placeholder-umersajid">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=61595644480292">Facebook</a> ·
+      <a href="https://www.instagram.com/ii_umermughal/">Instagram</a>
     </p>
   </section>
 
