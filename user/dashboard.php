@@ -107,12 +107,12 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
 
   <h2>Messages with Admin (<?php echo count($messages); ?>)</h2>
   <p class="muted">Admin replies to your requests appear here. Reply below and the admin will see it in their panel.</p>
-  <?php if (empty($messages)): ?><p>No messages yet.</p><?php else: ?>
-    <div class="chat">
+  <?php if (empty($messages)): ?><p class="chat-empty">No messages yet — start the conversation below. Your reply will appear here for both sides.</p><?php else: ?>
+    <div class="chat-box" id="chatBox">
       <?php foreach ($messages as $m): ?>
         <div class="chat-msg <?php echo $m['sender_role'] === 'admin' ? 'from-admin' : 'from-user'; ?>">
-          <strong><?php echo $m['sender_role'] === 'admin' ? 'Admin' : 'You'; ?></strong>
-          <span class="muted"><?php echo htmlspecialchars($m['created_at']); ?></span>
+          <div class="chat-meta"><strong><?php echo $m['sender_role'] === 'admin' ? 'Admin' : 'You'; ?></strong>
+          <span><?php echo htmlspecialchars($m['created_at']); ?></span></div>
           <p><?php echo nl2br(htmlspecialchars($m['message'])); ?></p>
         </div>
       <?php endforeach; ?>
@@ -120,7 +120,7 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
   <?php endif; ?>
   <form method="post">
     <input type="hidden" name="send_message" value="1">
-    <label>Write to admin <textarea name="message" rows="3" required></textarea></label>
+    <label class="sr-only" for="chatInput">Write to admin</label><textarea id="chatInput" name="message" rows="3" required></textarea>
     <button class="btn" type="submit">Send Message</button>
   </form>
 </section>
