@@ -441,3 +441,13 @@ img { max-width: 100%; }
   .profile-photo img { height: 280px; }
   .chat-msg { max-width: 92%; }
 }
+
+/* ================= v5 — admin sections, new-message badges, blog ================= */
+.admin-section { border-top: 1px solid var(--border-soft); padding-top: 1.5rem; margin-top: 2.5rem; }
+.admin-section:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+.thread-card { margin-bottom: 1rem; }
+.unread-badge { display: inline-block; background: #c0392b; color: #fff; padding: 0.15rem 0.7rem; border-radius: 999px; font-size: 0.85rem; font-weight: 800; }
+.badge-archived { background: #555; }
+.badge-published { background: #1f5c3d; }
+.badge-draft { background: #5c4a00; }
+.blog-list p { max-width: 720px; }
