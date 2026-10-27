@@ -41,7 +41,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Umer Sajid — Personal Portfolio</title>
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 <header>
@@ -49,13 +49,12 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
     <strong>Umer Sajid</strong>
   </div>
   <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#services">Services</a>
+    <a href="index.php">Home</a>
+    <a href="about.php">About</a>
+    <a href="services.php">Services</a>
     <a href="blog.php">Blog</a>
-    <a href="#process">Process</a>
-    <a href="#contact">Contact</a>
-    <a href="user/login.php" class="nav-cta">User Panel</a>
+    <a href="index.php#contact">Contact</a>
+    <a href="user/login.php" class="nav-profile" title="User Panel" aria-label="User Panel"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/></svg><span class="sr-only">User Panel</span></a>
   </nav>
 </header>
 
@@ -97,7 +96,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
       </div>
       <?php if ($hasPhoto): ?>
       <div class="profile-photo">
-        <img src="<?php echo htmlspecialchars($profilePhoto); ?>" alt="Umer Sajid — professional portrait in a dark suit">
+        <img src="<?php echo htmlspecialchars($profilePhoto); ?>?v=5" alt="Umer Sajid — professional portrait in a dark suit">
         <p class="profile-caption">Umer Sajid · Professional Portfolio</p>
       </div>
       <?php endif; ?>
@@ -107,7 +106,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
       <p><?php echo htmlspecialchars($heroIntro); ?></p>
       <blockquote class="motivation"><?php echo htmlspecialchars($motivationQuote); ?></blockquote>
       <p>
-        <a class="btn" href="#services">My Services</a>
+        <a class="btn" href="services.php">My Services</a>
         <a class="btn" href="#contact">Work With Me</a>
       </p>
       <div class="hero-cards">
@@ -127,81 +126,28 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
     <h2>About Me</h2>
     <p class="about-intro"><?php echo htmlspecialchars($aboutIntro); ?></p>
     <blockquote class="motivation"><?php echo htmlspecialchars($motivationQuote); ?></blockquote>
-
-    <h3>Education</h3>
-    <div class="about-grid">
-      <div class="card about-card">
-        <p class="about-date">M.S. · University of Azad Jammu &amp; Kashmir, Muzaffarabad</p>
-        <h4>MS in Software Engineering</h4>
-        <p>Advanced study in software engineering — building reliable, modern software and digital solutions.</p>
-      </div>
-      <div class="card about-card">
-        <p class="about-date">B.Sc. · Mirpur University of Science and Technology (MUST)</p>
-        <h4>B.Sc. Software Engineering</h4>
-        <p>Foundation in software design, programming, databases and problem solving.</p>
-      </div>
-      <div class="card about-card">
-        <p class="about-date">International Diploma · China</p>
-        <h4>One-Year Diploma</h4>
-        <p>One year of international study and training in China, adding a global perspective to my work.</p>
-      </div>
-    </div>
-
-    <h3>Working Experience</h3>
-    <div class="about-grid">
-      <div class="card about-card">
-        <p class="about-date">07/09/2021 – Current · Muzaffarabad, Azad Kashmir</p>
-        <h4>IT Engineer</h4>
-        <p>Azad Jammu and Kashmir Electricity Department, Muzaffarabad — IT systems, support and digital operations.</p>
-      </div>
-      <div class="card about-card">
-        <p class="about-date">08/11/2019 – 28/10/2020 · Muzaffarabad, Azad Kashmir, Pakistan</p>
-        <h4>Database Administrator</h4>
-        <p>Azad Jammu and Kashmir Electricity Department, Muzaffarabad — database management, integrity and reliable data systems.</p>
-      </div>
-    </div>
-
-    <h3>International Certification</h3>
-    <div class="about-grid">
-      <div class="card about-card">
-        <p class="about-date">Udemy · International Certification</p>
-        <h4>Generative AI</h4>
-        <p>Machine Supervised Learning: Regression in Python 3 and Math — practical AI and machine-learning skills for modern projects.</p>
-      </div>
-    </div>
-
-    <h3>Networks &amp; Memberships</h3>
-    <div class="about-grid">
-      <div class="card about-card">
-        <p class="about-date">30/10/2019 – Current · Pakistan</p>
-        <h4>Professional Affiliation</h4>
-        <p>Registered Engineer with the Pakistan Engineering Council (PEC) since 2019.<br>Registration Number: <strong>COMP/18605</strong></p>
-      </div>
-    </div>
-
-    <p class="about-links">
-      <a href="https://linkedin.com/umersajid">LinkedIn</a> ·
-      <a href="https://www.facebook.com/profile.php?id=61595644480292">Facebook</a> ·
-      <a href="https://www.instagram.com/ii_umermughal/">Instagram</a>
-    </p>
+    <p><a class="btn" href="about.php">Read full About →</a></p>
   </section>
 
   <section id="services">
     <h2>Services</h2>
-    <p>Click any service to see what is included, who it is for, and how to start it.</p>
+    <p>A few of the services I offer — see them all on the Services page.</p>
     <div class="grid">
-      <?php foreach ($services as $s):
-        $slug = $s['slug'] ?? '';
-        if (!$slug) { $found = find_service($s['title']); $slug = $found['slug'] ?? ''; }
+      <?php
+      $featured = ['website-design', 'video-editing', 'voiceover-scripts'];
+      foreach ($featured as $slug):
+        $s = $merged[$slug] ?? null;
+        if (!$s) continue;
       ?>
         <div class="card service-card">
           <p class="service-card-icon"><?php echo htmlspecialchars($s['icon'] ?? '✦'); ?></p>
           <h3><?php echo htmlspecialchars($s['title']); ?></h3>
           <p><?php echo htmlspecialchars($s['description']); ?></p>
-          <?php if ($slug): ?><p><a href="service.php?slug=<?php echo urlencode($slug); ?>">View details →</a></p><?php endif; ?>
+          <p><a href="service.php?slug=<?php echo urlencode($slug); ?>">View details →</a></p>
         </div>
       <?php endforeach; ?>
     </div>
+    <p style="text-align:center"><a class="btn" href="services.php">View All Services →</a></p>
   </section>
 
 
@@ -269,9 +215,10 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 
 <footer>
   <p>© Umer Sajid · MS Software Engineering · One-year diploma from China</p>
-  <p><a href="blog.php">Blog</a></p>
+  <p><a href="about.php">About</a> · <a href="services.php">Services</a> · <a href="blog.php">Blog</a> · <a href="user/login.php">User Panel</a></p>
   <p class="footer-admin"><a href="admin/login.php">Admin</a></p>
 </footer>
 <script src="js/script.js"></script>
+<script src="js/assistant.js"></script>
 </body>
 </html>

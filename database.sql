@@ -17,6 +17,14 @@
 --   ALTER TABLE services ADD COLUMN slug VARCHAR(100) NULL AFTER title;
 --   (Then import/create the messages table below, and update service slugs.)
 --
+-- V6.1 UPGRADE NOTE (existing live databases): run this before deploying
+-- the chat Archive/Delete buttons in admin/messages.php. No existing
+-- table is changed and no data is deleted by this statement:
+--   CREATE TABLE IF NOT EXISTS archived_chats (
+--       user_id INT UNSIGNED NOT NULL PRIMARY KEY,
+--       archived_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+--   );
+--
 -- V5 UPGRADE NOTE (existing live databases): run these before deploying v5:
 --   ALTER TABLE messages ADD COLUMN is_read TINYINT(1) NOT NULL DEFAULT 0 AFTER message;
 --   -- 'archived' needs NO schema change: clients.status is VARCHAR(30),
@@ -109,6 +117,15 @@ CREATE TABLE IF NOT EXISTS blog_posts (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_blog_status (status)
+);
+
+-- v6.1 Chat archiving: a user_id listed here has its thread hidden
+-- from the main Messages list (shown again via "Show Archived Chats").
+-- Archiving never deletes messages; deleting a chat is a separate
+-- DELETE FROM messages WHERE user_id = ? action in admin/messages.php.
+CREATE TABLE IF NOT EXISTS archived_chats (
+    user_id INT UNSIGNED NOT NULL PRIMARY KEY,
+    archived_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- v5 Website settings: front-page wording editable from admin/settings.php.

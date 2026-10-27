@@ -11,10 +11,10 @@ $posts = get_published_posts($db);
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — Umer Sajid | AI &amp; Technology</title>
 <meta name="description" content="AI and technology blog by Umer Sajid — new posts on AI, software and modern technology.">
-<link rel="stylesheet" href="css/style.css?v=4"></head>
+<link rel="stylesheet" href="css/style.css?v=5"></head>
 <body>
 <header><div class="header-brand"><strong>Umer Sajid</strong></div>
-<nav><a href="index.php#about">About</a> <a href="index.php#services">Services</a> <a href="blog.php">Blog</a> <a href="index.php#contact">Contact</a> <a href="user/login.php" class="nav-cta">User Panel</a></nav></header>
+<nav><a href="index.php">Home</a> <a href="about.php">About</a> <a href="services.php">Services</a> <a href="blog.php">Blog</a> <a href="index.php#contact">Contact</a> <a href="user/login.php" class="nav-profile" title="User Panel" aria-label="User Panel"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/></svg><span class="sr-only">User Panel</span></a></nav></header>
 <main>
 <section>
   <h1>Blog</h1>
@@ -36,6 +36,7 @@ $posts = get_published_posts($db);
 </section>
 </main>
 <footer><p>© Umer Sajid · MS Software Engineering · One-year diploma from China</p>
-<p><a href="blog.php">Blog</a> · <a href="admin/login.php">Admin</a></p></footer>
+<p><a href="blog.php">Blog</a> · <a href="user/login.php">User Panel</a> · <a href="admin/login.php">Admin</a></p></footer>
+<script src="js/assistant.js"></script>
 </body>
 </html>
