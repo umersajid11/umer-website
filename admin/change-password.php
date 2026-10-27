@@ -36,7 +36,7 @@ $mustChange = !empty($_SESSION['admin_must_change_password']);
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Change Password — Admin</title><link rel="stylesheet" href="../css/style.css"></head>
 <body>
-<header><strong>Admin Panel</strong><nav><a href="../index.php">Home</a> <a href="dashboard.php?action=logout">Logout</a></nav></header>
+<?php require __DIR__ . '/_menu.php'; ?>
 <section>
   <h1>Change Password</h1>
   <?php if ($mustChange): ?><p class="notice">You are using the seed placeholder password. You must set a new password before the dashboard opens.</p><?php endif; ?>

@@ -25,7 +25,7 @@ $posts = get_all_posts($db);
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog Manager — Admin</title><link rel="stylesheet" href="../css/style.css?v=4"></head>
 <body>
-<header><strong>Admin Panel</strong><nav><a href="dashboard.php">Dashboard</a> <a href="../blog.php">View Blog</a> <a href="settings.php">Settings</a> <a href="dashboard.php?action=logout">Logout</a></nav></header>
+<?php require __DIR__ . '/_menu.php'; ?>
 <section>
   <h1>📝 Blog Manager</h1>
   <p class="muted">Write one AI / tech post a day here. <strong>Published</strong> posts appear on the public Blog page (good for Google / AdSense and SEO); <strong>Draft</strong> posts stay hidden until you publish them.</p>

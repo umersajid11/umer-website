@@ -39,7 +39,7 @@ $labels = [
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Website Settings — Admin</title><link rel="stylesheet" href="../css/style.css?v=4"></head>
 <body>
-<header><strong>Admin Panel</strong><nav><a href="dashboard.php">Dashboard</a> <a href="blog.php">Blog</a> <a href="../index.php">Home</a> <a href="dashboard.php?action=logout">Logout</a></nav></header>
+<?php require __DIR__ . '/_menu.php'; ?>
 <section>
   <h1>⚙️ Website Settings</h1>
   <p class="muted">Change the front-page wording here — no coding needed. Saving here only changes text shown on the site; it never changes passwords, database settings, or any code file.</p>
