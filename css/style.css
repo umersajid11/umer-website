@@ -464,3 +464,39 @@ img { max-width: 100%; }
 .menu-card-icon { font-size: 2rem; }
 .menu-card strong { font-size: 1.2rem; }
 .menu-card span:last-child { color: var(--muted); font-size: 0.95rem; }
+
+/* ================= v6.1 — profile icon in place of the "User Panel" nav text =================
+   Circular person-silhouette icon (generic visitor icon, NOT the owner's photo),
+   linking to the user login/panel. Text "User Panel" remains in the footer. */
+.nav-profile { display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--accent, #ffb347);
+  color: var(--text, #fff); background: var(--card, #1b1f3d); text-decoration: none;
+  vertical-align: middle; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+.nav-profile:hover { transform: scale(1.08); border-color: #ffd28a; background: #262a52; }
+.nav-profile svg { display: block; }
+
+/* ================= chatbot — simple floating assistant =================
+   Bottom-right bubble, closed by default so it never covers the hero.
+   Theme: navy #0f1226, card #1b1f3d, amber #ffb347, blue #6c9bff. */
+#site-chatbot { position: fixed; right: 18px; bottom: 18px; z-index: 9999; font-family: inherit; }
+.chatbot-bubble { width: 56px; height: 56px; border-radius: 50%; border: 2px solid #ffb347; background: #1b1f3d; color: #fff; font-size: 1.5rem; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,.45); }
+.chatbot-bubble:hover { background: #262a52; transform: scale(1.06); }
+.chatbot-panel { position: absolute; right: 0; bottom: 68px; width: 340px; max-width: calc(100vw - 36px); background: #0f1226; border: 2px solid #ffb347; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,.5); }
+.chatbot-head { background: #1b1f3d; color: #fff; padding: .9rem 1rem; display: flex; flex-direction: column; gap: .15rem; position: relative; }
+.chatbot-head span { color: #c9cbe0; font-size: .85rem; }
+.chatbot-close { position: absolute; right: .6rem; top: .6rem; background: none; border: none; color: #fff; font-size: 1rem; cursor: pointer; }
+.chatbot-messages { height: 260px; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .6rem; }
+.chatbot-msg { max-width: 88%; padding: .6rem .8rem; border-radius: 12px; line-height: 1.45; font-size: .95rem; }
+.chatbot-msg a { color: #6c9bff; }
+.chatbot-bot { background: #1b1f3d; color: #fff; align-self: flex-start; border: 1px solid #2a2f5e; }
+.chatbot-user { background: #ffb347; color: #1b1f3d; align-self: flex-end; }
+.chatbot-quick { display: flex; flex-wrap: wrap; gap: .4rem; padding: 0 1rem .6rem; }
+.chatbot-quick button { background: #1b1f3d; color: #fff; border: 1px solid #6c9bff; border-radius: 999px; padding: .3rem .8rem; cursor: pointer; font-size: .85rem; }
+.chatbot-quick button:hover { border-color: #ffb347; }
+.chatbot-form { display: flex; gap: .4rem; padding: 0 1rem 1rem; }
+.chatbot-form input { flex: 1; min-width: 0; }
+.chatbot-form button, .chatbot-leave-form button { background: #ffb347; color: #1b1f3d; border: none; border-radius: 10px; padding: .55rem .9rem; font-weight: 700; cursor: pointer; }
+.chatbot-leave { border-top: 1px solid #2a2f5e; padding: .7rem 1rem 1rem; color: #c9cbe0; font-size: .9rem; }
+.chatbot-leave summary { cursor: pointer; }
+.chatbot-leave-form { display: flex; flex-direction: column; gap: .5rem; margin-top: .6rem; }
+.chatbot-leave-form input, .chatbot-leave-form textarea { width: 100%; box-sizing: border-box; }
