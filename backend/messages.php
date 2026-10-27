@@ -101,3 +101,53 @@ function count_unread_messages($db) {
     try { return (int) $db->query("SELECT COUNT(*) FROM messages WHERE sender_role = 'user' AND is_read = 0")->fetchColumn(); }
     catch (Throwable $e) { return 0; }
 }
+
+// v6.1 chat archive/delete: archived chats live in their own small
+// table, so no existing table is changed. Every helper degrades
+// gracefully when archived_chats does not exist yet (treated as
+// "not archived", no crash) — run the CREATE in database.sql to
+// enable archiving. Deleting a chat removes ONLY that user's rows
+// from messages; it never touches users, clients or inquiries.
+function archived_chats_has_table($db) {
+    if (!$db) return false;
+    try {
+        $stmt = $db->prepare("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'archived_chats'");
+        $stmt->execute();
+        return (int) $stmt->fetchColumn() > 0;
+    } catch (Throwable $e) { return false; }
+}
+
+function get_archived_user_ids($db) {
+    if (!$db || !archived_chats_has_table($db)) return [];
+    try { return array_map('intval', $db->query("SELECT user_id FROM archived_chats")->fetchAll(PDO::FETCH_COLUMN)); }
+    catch (Throwable $e) { return []; }
+}
+
+function is_chat_archived($db, $userId) {
+    if (!$db) return false;
+    return in_array((int) $userId, get_archived_user_ids($db), true);
+}
+
+function archive_chat($db, $userId) {
+    if (!$db || !archived_chats_has_table($db)) return false;
+    try {
+        $stmt = $db->prepare("INSERT INTO archived_chats (user_id) VALUES (?) ON DUPLICATE KEY UPDATE archived_at = CURRENT_TIMESTAMP");
+        return $stmt->execute([(int) $userId]);
+    } catch (Throwable $e) { return false; }
+}
+
+function unarchive_chat($db, $userId) {
+    if (!$db || !archived_chats_has_table($db)) return false;
+    try {
+        $stmt = $db->prepare("DELETE FROM archived_chats WHERE user_id = ?");
+        return $stmt->execute([(int) $userId]);
+    } catch (Throwable $e) { return false; }
+}
+
+function delete_chat_messages($db, $userId) {
+    if (!$db) return false;
+    try {
+        $stmt = $db->prepare("DELETE FROM messages WHERE user_id = ?");
+        return $stmt->execute([(int) $userId]);
+    } catch (Throwable $e) { return false; }
+}
