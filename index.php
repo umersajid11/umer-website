@@ -117,9 +117,61 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello, I am Umer Sajid — MS in Software Engineering, with a one-year diploma from China. I work on creative video content, voiceovers, and websites — always family-friendly and positive. My goal is simple: good work, delivered on time, that you are proud to share.</p>
+    <p class="about-intro">Hello, I am Umer Sajid — a software engineer, IT professional and creative content creator from Muzaffarabad, Azad Kashmir. I build modern websites, manage databases and create family-friendly, positive video content. My goal is simple: honest work, delivered on time, that you are proud to share.</p>
     <blockquote class="motivation">“Dream big, work honestly, and let every small step take you further.”</blockquote>
-    <p>
+
+    <h3>Education</h3>
+    <div class="about-grid">
+      <div class="card about-card">
+        <p class="about-date">M.S. · University of Azad Jammu &amp; Kashmir, Muzaffarabad</p>
+        <h4>MS in Software Engineering</h4>
+        <p>Advanced study in software engineering — building reliable, modern software and digital solutions.</p>
+      </div>
+      <div class="card about-card">
+        <p class="about-date">B.Sc. · Mirpur University of Science and Technology (MUST)</p>
+        <h4>B.Sc. Software Engineering</h4>
+        <p>Foundation in software design, programming, databases and problem solving.</p>
+      </div>
+      <div class="card about-card">
+        <p class="about-date">International Diploma · China</p>
+        <h4>One-Year Diploma</h4>
+        <p>One year of international study and training in China, adding a global perspective to my work.</p>
+      </div>
+    </div>
+
+    <h3>Working Experience</h3>
+    <div class="about-grid">
+      <div class="card about-card">
+        <p class="about-date">07/09/2021 – Current · Muzaffarabad, Azad Kashmir</p>
+        <h4>IT Engineer</h4>
+        <p>Azad Jammu and Kashmir Electricity Department, Muzaffarabad — IT systems, support and digital operations.</p>
+      </div>
+      <div class="card about-card">
+        <p class="about-date">08/11/2019 – 28/10/2020 · Muzaffarabad, Azad Kashmir, Pakistan</p>
+        <h4>Database Administrator</h4>
+        <p>Azad Jammu and Kashmir Electricity Department, Muzaffarabad — database management, integrity and reliable data systems.</p>
+      </div>
+    </div>
+
+    <h3>International Certification</h3>
+    <div class="about-grid">
+      <div class="card about-card">
+        <p class="about-date">Udemy · International Certification</p>
+        <h4>Generative AI</h4>
+        <p>Machine Supervised Learning: Regression in Python 3 and Math — practical AI and machine-learning skills for modern projects.</p>
+      </div>
+    </div>
+
+    <h3>Networks &amp; Memberships</h3>
+    <div class="about-grid">
+      <div class="card about-card">
+        <p class="about-date">30/10/2019 – Current · Pakistan</p>
+        <h4>Professional Affiliation</h4>
+        <p>Registered Engineer with the Pakistan Engineering Council (PEC) since 2019.<br>Registration Number: <strong>COMP/18605</strong></p>
+      </div>
+    </div>
+
+    <p class="about-links">
       <a href="https://linkedin.com/umersajid">LinkedIn</a> ·
       <a href="https://www.facebook.com/profile.php?id=61595644480292">Facebook</a> ·
       <a href="https://www.instagram.com/ii_umermughal/">Instagram</a>
