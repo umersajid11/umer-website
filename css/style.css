@@ -451,3 +451,16 @@ img { max-width: 100%; }
 .badge-published { background: #1f5c3d; }
 .badge-draft { background: #5c4a00; }
 .blog-list p { max-width: 720px; }
+
+/* ================= v6 — separate admin pages, one job per page =================
+   Big home menu cards, a red new-message alert, and a plain
+   one-sentence intro on each admin page. No other rules changed. */
+.page-intro { font-size: 1.08rem; }
+.alert-new { background: #5c1410; border: 2px solid #e74c3c; border-radius: 16px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+.alert-new p { margin: 0.3rem 0; }
+.admin-menu-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.1rem; margin: 1.25rem 0; }
+.menu-card { display: flex; flex-direction: column; gap: 0.4rem; background: linear-gradient(180deg, var(--card-2), var(--card)); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; text-decoration: none; color: var(--text); box-shadow: var(--shadow-sm); }
+.menu-card:hover { border-color: var(--accent); color: var(--text); transform: translateY(-3px); }
+.menu-card-icon { font-size: 2rem; }
+.menu-card strong { font-size: 1.2rem; }
+.menu-card span:last-child { color: var(--muted); font-size: 0.95rem; }
