@@ -1,7 +1,14 @@
 <?php
 require_once __DIR__ . '/backend/database.php';
 require_once __DIR__ . '/backend/services.php';
+require_once __DIR__ . '/backend/content.php';
 $db = get_db_connection();
+// v5 site settings: read from DB when available, otherwise the built-in text below.
+$heroTitle = get_site_setting($db, 'hero_title');
+$heroIntro = get_site_setting($db, 'hero_intro');
+$motivationQuote = get_site_setting($db, 'motivation_quote');
+$aboutIntro = get_site_setting($db, 'about_intro');
+$contactNotice = get_site_setting($db, 'contact_notice');
 $services = [];
 if ($db) {
     try { $services = $db->query("SELECT title, slug, description FROM services WHERE is_active = 1 ORDER BY id")->fetchAll(); } catch (Throwable $e) { $services = []; }
@@ -45,6 +52,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#services">Services</a>
+    <a href="blog.php">Blog</a>
     <a href="#process">Process</a>
     <a href="#contact">Contact</a>
     <a href="user/login.php" class="nav-cta">User Panel</a>
@@ -94,10 +102,10 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
       </div>
       <?php endif; ?>
       <span class="tag">Personal Portfolio</span>
-      <h1>Umer Sajid</h1>
+      <h1><?php echo htmlspecialchars($heroTitle); ?></h1>
       <p class="hero-credentials">MS in Software Engineering · One-year diploma from China</p>
-      <p>I create wholesome, family-friendly videos and help people build their presence online — with honest work, clear communication and attention to detail.</p>
-      <blockquote class="motivation">“Dream big, work honestly, and let every small step take you further.”</blockquote>
+      <p><?php echo htmlspecialchars($heroIntro); ?></p>
+      <blockquote class="motivation"><?php echo htmlspecialchars($motivationQuote); ?></blockquote>
       <p>
         <a class="btn" href="#services">My Services</a>
         <a class="btn" href="#contact">Work With Me</a>
@@ -117,8 +125,8 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 
   <section id="about">
     <h2>About Me</h2>
-    <p class="about-intro">Hello, I am Umer Sajid — a software engineer, IT professional and creative content creator from Muzaffarabad, Azad Kashmir. I build modern websites, manage databases and create family-friendly, positive video content. My goal is simple: honest work, delivered on time, that you are proud to share.</p>
-    <blockquote class="motivation">“Dream big, work honestly, and let every small step take you further.”</blockquote>
+    <p class="about-intro"><?php echo htmlspecialchars($aboutIntro); ?></p>
+    <blockquote class="motivation"><?php echo htmlspecialchars($motivationQuote); ?></blockquote>
 
     <h3>Education</h3>
     <div class="about-grid">
@@ -220,7 +228,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 
   <section id="contact">
     <h2>Contact / Inquiry</h2>
-    <p>Send an inquiry below. Serious inquiries only, please — tell me what you need, and I will reply in your portal and here. Inquiries are saved to the database once it is connected; otherwise this form is a preview only.</p>
+    <p><?php echo htmlspecialchars($contactNotice); ?></p>
     <form method="post" action="index.php#contact">
       <label>Name <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
@@ -261,6 +269,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 
 <footer>
   <p>© Umer Sajid · MS Software Engineering · One-year diploma from China</p>
+  <p><a href="blog.php">Blog</a></p>
   <p class="footer-admin"><a href="admin/login.php">Admin</a></p>
 </footer>
 <script src="js/script.js"></script>

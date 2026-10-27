@@ -1,3 +1,70 @@
+# Umer Sajid — Personal Dynamic Website (v5, local only — NOT deployed)
+
+## What is new in v5 (local only — NOT deployed to GitHub or InfinityFree)
+
+- **Real profile photo:** `images/profile.jpg` is now the user's own
+  attached photo (verified JPEG, 1056×912), NOT the AI-generated face.
+  The old generated photo is kept as
+  `images/profile-generated-backup.jpg`. Display is unchanged: centred
+  rounded rectangle below the slider, gold border, same size/location.
+- **Admin dashboard redesigned — simple, separate sections, in order:**
+  1. Overview (cards + status bars, plus a New/Unread count)
+  2. ✉️ New Messages — immediately after Overview, grouped by user,
+     with sender name, message preview and time, and a "new" badge, so
+     it is obvious a new message arrived and from whom. Opening a chat
+     marks it read.
+  3. 💬 Messages by User — one thread per user, full previous history
+     in that user's own chat, with reply form (admin blue left, user
+     gold/brown right, as before).
+  4. Clients — list with status (new/contacted/done), Archive and
+     Delete actions. Archive sets status to `archived` and hides the
+     client by default (Show Archived toggle restores the view; Restore
+     puts it back to `new`). Delete asks for confirmation first and
+     also deletes that client's messages (matched by email), never
+     other clients' data.
+  5. ➕ Add Client — completely separate section/form, not mixed into
+     the clients list.
+  6. Registered Users detail table (as before).
+  7. Recent Inquiries (as before, with portal reply + status).
+  Admin header now links: Dashboard | Blog | Settings | Home.
+- **Blog (for AdSense / SEO):** `blog_posts` table
+  (id, slug unique, title, excerpt, body, cover_image, status
+  draft/published, created_at, updated_at). `admin/blog.php` (admin
+  only): list, create, edit, delete, draft/publish. Public `blog.php`
+  lists Published posts newest first; `blog-post.php?slug=...` shows
+  the full post with title/excerpt SEO meta. All output is escaped
+  with htmlspecialchars — no raw HTML is executed. Workflow: Admin →
+  Blog → New Post → save as Draft, then Publish when ready; the post
+  appears at once on the public Blog page. Front nav and footer now
+  link to Blog.
+- **Website settings (no-code content management):**
+  `site_settings` table (setting_key unique, setting_value TEXT).
+  `admin/settings.php` (admin only) edits: hero title, hero intro
+  text, motivational quote, About intro paragraph, contact notice
+  text, with a save confirmation. `index.php` reads these when the
+  DB/table exists and falls back to the current built-in text
+  otherwise. Settings editing NEVER touches `backend/config.php`,
+  credentials, or code files.
+- **Read tracking:** `messages.is_read` (TINYINT, default 0).
+  User-sent messages start unread; opening the thread in the admin
+  dashboard marks them read. `backend/messages.php` checks for the
+  column first and falls back gracefully on old databases.
+
+### Live-DB migration statements for v5 (run in phpMyAdmin, existing DB only)
+```sql
+ALTER TABLE messages ADD COLUMN is_read TINYINT(1) NOT NULL DEFAULT 0 AFTER message;
+-- No ALTER is needed for archived clients: clients.status is VARCHAR(30).
+-- Then create the two new tables (CREATE TABLE IF NOT EXISTS, safe to import):
+--   blog_posts   (see database.sql)
+--   site_settings (see database.sql)
+-- Or simply import the new blog_posts + site_settings blocks from database.sql.
+```
+After migration, deploy the v5 files (index.php, blog.php,
+blog-post.php, admin/dashboard.php, admin/blog.php, admin/settings.php,
+backend/content.php, backend/messages.php, css/style.css,
+images/profile.jpg). Do NOT deploy backend/config.php changes and do
+NOT run setup.php (it must stay disabled on live).
+
 # Umer Sajid — Personal Dynamic Website (v3 portfolio fix, local only — NOT deployed)
 
 ## What is new in v3
