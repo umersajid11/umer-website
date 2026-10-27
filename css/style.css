@@ -360,6 +360,32 @@ form select { width: 100%; padding: 0.85rem 1rem; margin: 0.4rem 0 1.1rem; borde
 .slide-image { width: 300px; height: 190px; flex-shrink: 0; object-fit: cover; border-radius: 16px; box-shadow: var(--shadow); }
 @media (max-width: 720px) { .slide-image { width: 100%; height: 180px; } }
 
+/* ================= v4 — centred headings, centred About, centred How I Work =================
+   All section headings are centred (accent bar centred under them),
+   the About section is centred, and the How I Work steps are centred
+   as a row — including the last card, which no longer sits left on
+   its own row. About cards keep left-aligned body text inside for
+   readability, while their headings and dates are centred. */
+section h2 { text-align: center; }
+section h2::before { margin-left: auto; margin-right: auto; }
+section h1 { text-align: center; }
+section h1::after { margin-left: auto; margin-right: auto; }
+section > p, .section-lead { text-align: center; margin-left: auto; margin-right: auto; }
+#about { text-align: center; }
+#about h3 { text-align: center; margin: 2.25rem 0 1rem; font-size: 1.35rem; }
+#about .about-intro { max-width: 760px; margin-left: auto; margin-right: auto; }
+#about .motivation { text-align: center; border-left: none; border-top: 3px solid var(--accent); padding: 1rem 0 0; }
+.about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.1rem; margin: 1.25rem auto 0; text-align: left; }
+.about-card { border-top-color: var(--accent); }
+.about-card h4 { margin: 0.3rem 0 0.5rem; font-size: 1.15rem; text-align: center; }
+.about-date { color: var(--accent-soft); font-weight: 700; font-size: 0.92rem; text-align: center; }
+.about-links { margin-top: 2rem; text-align: center; }
+#process .steps-grid { justify-content: center; }
+#process .steps-grid .card { text-align: center; }
+#process .steps-grid .card p { text-align: center; }
+/* Contact form stays centred as a block, labels left for readability */
+#contact form { margin-left: auto; margin-right: auto; }
+
 /* ================= v3 — portfolio fix =================
    Fixes the reported overflow: the slider is now a fixed-height,
    fully contained box (images cover it, never spill out), the
