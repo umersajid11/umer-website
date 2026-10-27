@@ -34,7 +34,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Umer Sajid — Personal Portfolio</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 <header>
