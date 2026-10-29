@@ -41,7 +41,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Umer Sajid — Personal Portfolio</title>
-<link rel="stylesheet" href="css/style.css?v=10">
+<link rel="stylesheet" href="css/style.css?v=11">
 </head>
 <body>
 <header>
@@ -155,9 +155,9 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
     <h2>Skills</h2>
     <p class="section-lead">Tools and skills I use every day to deliver clean, professional work.</p>
     <div class="skill-chips">
-      <span>Website Design</span><span>PHP &amp; MySQL</span><span>Video Editing</span>
-      <span>Voiceover (Urdu &amp; English)</span><span>Social Media</span><span>Logo &amp; Thumbnails</span>
-      <span>SEO Basics</span><span>Content Writing</span><span>AI Tools</span>
+      <span>Web Development</span><span>Chatbot Development</span>
+      <span>Machine Learning</span><span>Deep Learning</span><span>Computer Vision</span><span>Image Processing</span>
+      <span>Video Editing</span>
     </div>
   </section>
 
@@ -174,12 +174,12 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 
   <section id="contact">
     <h2>Contact / Inquiry</h2>
-    <p><?php echo htmlspecialchars($contactNotice); ?></p>       <p class="muted">No account needed — just ask your question here. It goes straight to the admin's Inquiries. If you want the admin's reply to appear in your own panel, register in the User Panel with this same email address.</p>
+    <p><?php echo htmlspecialchars($contactNotice); ?></p>
+    <p class="muted">No account needed — just ask your question here. It goes straight to the admin's Inquiries. If you want the admin's reply to appear in your own panel, register in the User Panel with this same email address.</p>
     <form method="post" action="index.php#contact">
       <label>Name <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
       <label>Service
-          
         <select name="service">
           <option value="">— Choose a service —</option>
           <?php foreach (service_catalogue() as $slug => $s): ?>

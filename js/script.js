@@ -83,6 +83,25 @@ document.addEventListener('DOMContentLoaded', function () {
   slider.addEventListener('mouseleave', start);
   slider.addEventListener('focusin', stop);
   slider.addEventListener('focusout', start);
+  // Mobile: swipe left/right to move. This was missing before, so on a
+  // phone the slider only changed on auto-advance or a tiny arrow tap
+  // — swiping did nothing, which is why it looked stuck.
+  var touchX = null, touchY = null;
+  slider.addEventListener('touchstart', function (e) {
+    var t = e.changedTouches[0];
+    touchX = t.clientX; touchY = t.clientY;
+    stop();
+  }, { passive: true });
+  slider.addEventListener('touchend', function (e) {
+    if (touchX === null) { start(); return; }
+    var t = e.changedTouches[0];
+    var dx = t.clientX - touchX, dy = t.clientY - touchY;
+    touchX = null; touchY = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) show(current + 1); else show(current - 1);
+    }
+    start();
+  }, { passive: true });
   start();
 })();
 

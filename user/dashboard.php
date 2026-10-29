@@ -42,11 +42,15 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>User Panel — Umer Sajid</title><link rel="stylesheet" href="../css/style.css"></head>
+<title>User Panel — Umer Sajid</title><link rel="stylesheet" href="../css/style.css?v=9"></head>
 <body>
 <header><strong>Your Panel</strong><nav><a href="../index.php">Home</a> <a href="dashboard.php?action=logout">Logout</a></nav></header>
 <section>
-  <h1>Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? ''); ?> 👋</h1> <p class="page-intro">This panel has only three things, in this order:<br><strong>1 · Your Inquiries</strong> — questions/requests you sent (from here or the Contact form). Their stage tells you where they stand.<br><strong>2 · Chat with Admin</strong> — your conversation with the admin.<br><strong>3 · Browse Services</strong> — at the bottom, only when you want to look around.</p>
+  <h1>Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? ''); ?> 👋</h1>
+  <p class="page-intro">This panel has only three things, in this order:<br>
+  <strong>1 · Your Inquiries</strong> — questions/requests you sent (from here or the Contact form). Their stage tells you where they stand.<br>
+  <strong>2 · Chat with Admin</strong> — your conversation with the admin.<br>
+  <strong>3 · Browse Services</strong> — at the bottom, only when you want to look around.</p>
   <?php if ($msg): ?><p><?php echo htmlspecialchars($msg); ?></p><?php endif; ?>
   <?php if (!$db): ?><p class="notice">Database not connected yet — your profile, requests and messages will appear here once the database is connected.</p><?php endif; ?>
 
@@ -64,8 +68,8 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
     <?php else: ?><p class="muted">Profile detail will show here after registration with the detailed form.</p><?php endif; ?>
   </div>
 
-
-  <h2>1 · Your Inquiries (<?php echo count($myInquiries); ?>)</h2> <p class="muted">Every question or request you sent, with its stage: <strong>new</strong> = just arrived, <strong>contacted</strong> = admin talked to you, <strong>done</strong> = finished. The same inquiry also shows in the admin's Inquiries — it is one thing, not two.</p>
+  <h2>1 · Your Inquiries (<?php echo count($myInquiries); ?>)</h2>
+  <p class="muted">Every question or request you sent, with its stage: <strong>new</strong> = just arrived, <strong>contacted</strong> = admin talked to you, <strong>done</strong> = finished. The same inquiry also shows in the admin's Inquiries — it is one thing, not two.</p>
   <?php if (empty($myInquiries)): ?>
     <p>No inquiries yet. Use "Send a new inquiry" below to place your first one.</p>
   <?php else: ?>
@@ -77,7 +81,8 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
     </table>
   <?php endif; ?>
 
-  <h2>Send a new inquiry</h2> <p class="muted">This appears above, under Your Inquiries, and in the admin's Inquiries.</p>
+  <h2>Send a new inquiry</h2>
+  <p class="muted">This appears above, under Your Inquiries, and in the admin's Inquiries.</p>
   <form method="post">
     <input type="hidden" name="new_inquiry" value="1">
     <label>Service
@@ -86,7 +91,7 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
       </select>
     </label>
     <label>Your message <textarea name="message" rows="3" required></textarea></label>
-    <button class="btn" type="submit">Send Request</button>
+    <button class="btn" type="submit">Send Inquiry</button>
   </form>
 
   <h2>2 · Chat with Admin (<?php echo count($messages); ?>)</h2>

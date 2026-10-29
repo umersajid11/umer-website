@@ -605,3 +605,14 @@ img { max-width: 100%; }
 @media (max-width: 720px) {
   .profile-photo img { width: 180px; height: 180px; }
 }
+
+/* ================= v10.1 — mobile slider: swipe + big tap targets =================
+   The slider had no swipe support, so on a phone it only moved on
+   auto-advance or a small arrow tap and felt stuck. Arrows and dots
+   are now bigger on mobile and sit above the slide text. */
+.slide-arrow, .slide-dot { touch-action: manipulation; }
+@media (max-width: 720px) {
+  .slide-arrow { top: 50%; width: 48px; height: 48px; font-size: 1.8rem; }
+  .slide-dot { width: 16px; height: 16px; }
+  .slide-dot.is-active { width: 36px; }
+}
