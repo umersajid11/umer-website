@@ -46,7 +46,7 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
 <body>
 <header><strong>Your Panel</strong><nav><a href="../index.php">Home</a> <a href="dashboard.php?action=logout">Logout</a></nav></header>
 <section>
-  <h1>Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? ''); ?> 👋</h1>
+  <h1>Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? ''); ?> 👋</h1> <p class="page-intro">This panel has only three things, in this order:<br><strong>1 · Your Inquiries</strong> — questions/requests you sent (from here or the Contact form). Their stage tells you where they stand.<br><strong>2 · Chat with Admin</strong> — your conversation with the admin.<br><strong>3 · Browse Services</strong> — at the bottom, only when you want to look around.</p>
   <?php if ($msg): ?><p><?php echo htmlspecialchars($msg); ?></p><?php endif; ?>
   <?php if (!$db): ?><p class="notice">Database not connected yet — your profile, requests and messages will appear here once the database is connected.</p><?php endif; ?>
 
@@ -64,26 +64,10 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
     <?php else: ?><p class="muted">Profile detail will show here after registration with the detailed form.</p><?php endif; ?>
   </div>
 
-  <h2>Browse Services — like a shop</h2>
-  <p class="muted">Pick a service to see its detail page, then start it from there or from the form below.</p>
-  <div class="grid">
-    <?php foreach ($services as $s):
-      $slug = $s['slug'] ?? ''; if (!$slug) { $f = find_service($s['title']); $slug = $f['slug'] ?? ''; }
-    ?>
-      <div class="card product-card">
-        <h3><?php echo htmlspecialchars($s['title']); ?></h3>
-        <p><?php echo htmlspecialchars($s['description']); ?></p>
-        <p>
-          <?php if ($slug): ?><a class="btn btn-small" href="../service.php?slug=<?php echo urlencode($slug); ?>">View Details</a> <?php endif; ?>
-          <a href="../index.php?service=<?php echo urlencode($slug ?: $s['title']); ?>#contact">Start →</a>
-        </p>
-      </div>
-    <?php endforeach; ?>
-  </div>
 
-  <h2>Your Requests / Orders (<?php echo count($myInquiries); ?>)</h2>
+  <h2>1 · Your Inquiries (<?php echo count($myInquiries); ?>)</h2> <p class="muted">Every question or request you sent, with its stage: <strong>new</strong> = just arrived, <strong>contacted</strong> = admin talked to you, <strong>done</strong> = finished. The same inquiry also shows in the admin's Inquiries — it is one thing, not two.</p>
   <?php if (empty($myInquiries)): ?>
-    <p>No requests yet. Use the form below to place your first request.</p>
+    <p>No inquiries yet. Use "Send a new inquiry" below to place your first one.</p>
   <?php else: ?>
     <table>
       <tr><th>Service</th><th>Message</th><th>Status</th><th>Created</th></tr>
@@ -93,7 +77,7 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
     </table>
   <?php endif; ?>
 
-  <h2>New Request</h2>
+  <h2>Send a new inquiry</h2> <p class="muted">This appears above, under Your Inquiries, and in the admin's Inquiries.</p>
   <form method="post">
     <input type="hidden" name="new_inquiry" value="1">
     <label>Service
@@ -105,8 +89,8 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
     <button class="btn" type="submit">Send Request</button>
   </form>
 
-  <h2>Messages with Admin (<?php echo count($messages); ?>)</h2>
-  <p class="muted">Admin replies to your requests appear here. Reply below and the admin will see it in their panel.</p>
+  <h2>2 · Chat with Admin (<?php echo count($messages); ?>)</h2>
+  <p class="muted">Your conversation with the admin. Admin replies to your inquiries appear here too — this is the same chat the admin sees in Messages.</p>
   <?php if (empty($messages)): ?><p class="chat-empty">No messages yet — start the conversation below. Your reply will appear here for both sides.</p><?php else: ?>
     <div class="chat-box" id="chatBox">
       <?php foreach ($messages as $m): ?>
@@ -123,6 +107,22 @@ function status_badge($s) { return '<span class="badge badge-' . htmlspecialchar
     <label class="sr-only" for="chatInput">Write to admin</label><textarea id="chatInput" name="message" rows="3" required></textarea>
     <button class="btn" type="submit">Send Message</button>
   </form>
+  <h2>3 · Browse Services</h2>
+  <p class="muted">Only for looking around. To actually ask for work, use "Send a new inquiry" above.</p>
+  <div class="grid">
+    <?php foreach ($services as $s):
+      $slug = $s['slug'] ?? ''; if (!$slug) { $f = find_service($s['title']); $slug = $f['slug'] ?? ''; }
+    ?>
+      <div class="card product-card">
+        <h3><?php echo htmlspecialchars($s['title']); ?></h3>
+        <p><?php echo htmlspecialchars($s['description']); ?></p>
+        <p>
+          <?php if ($slug): ?><a class="btn btn-small" href="../service.php?slug=<?php echo urlencode($slug); ?>">View Details</a> <?php endif; ?>
+          <a href="../index.php?service=<?php echo urlencode($slug ?: $s['title']); ?>#contact">Start →</a>
+        </p>
+      </div>
+    <?php endforeach; ?>
+  </div>
 </section>
 </body>
 </html>
