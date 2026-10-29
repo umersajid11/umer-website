@@ -12,7 +12,8 @@ $db = get_db_connection();
 $counts = ['clients' => 0, 'inquiries' => 0, 'new_inquiries' => 0, 'users' => 0, 'unread' => 0];
 if ($db) {
     try { $counts['clients'] = (int) $db->query("SELECT COUNT(*) FROM clients WHERE status <> 'archived'")->fetchColumn(); } catch (Throwable $e) {}
-    try { $counts['inquiries'] = (int) $db->query("SELECT COUNT(*) FROM inquiries")->fetchColumn(); } catch (Throwable $e) {} try { $counts['new_inquiries'] = (int) $db->query("SELECT COUNT(*) FROM inquiries WHERE status = 'new'")->fetchColumn(); } catch (Throwable $e) {}
+    try { $counts['inquiries'] = (int) $db->query("SELECT COUNT(*) FROM inquiries")->fetchColumn(); } catch (Throwable $e) {}
+    try { $counts['new_inquiries'] = (int) $db->query("SELECT COUNT(*) FROM inquiries WHERE status = 'new'")->fetchColumn(); } catch (Throwable $e) {}
     try { $counts['users'] = (int) $db->query("SELECT COUNT(*) FROM users")->fetchColumn(); } catch (Throwable $e) {}
     $counts['unread'] = count_unread_messages($db);
 }
@@ -28,13 +29,21 @@ if ($db) {
   <p class="page-intro">Hello, Admin 👋 — this is your dashboard. It only shows the numbers. To do anything, tap one of the big boxes below — each box is one job.</p>
   <?php if (!$db): ?><p class="notice">Database not connected yet — numbers will show here once the database is connected.</p><?php endif; ?>
 
-  <?php if ($counts['new_inquiries'] > 0): ?> <div class="alert-new"> <p><strong>🔴 You have <?php echo $counts['new_inquiries']; ?> new inquir<?php echo $counts['new_inquiries'] > 1 ? 'ies' : 'y'; ?>!</strong></p> <p>Someone asked a question from the Contact form. It stays here until you set its stage to Contacted or Done.</p> <p><a class="btn" href="inquiries.php?tab=new">Open New Inquiries →</a></p> </div> <?php endif; ?> <?php if ($counts['unread'] > 0): ?>
+  <?php if ($counts['new_inquiries'] > 0): ?>
+    <div class="alert-new">
+      <p><strong>🔴 You have <?php echo $counts['new_inquiries']; ?> new inquir<?php echo $counts['new_inquiries'] > 1 ? 'ies' : 'y'; ?>!</strong></p>
+      <p>Someone asked a question from the Contact form. It stays here until you set its stage to Contacted or Done.</p>
+      <p><a class="btn" href="inquiries.php?tab=new">Open New Inquiries →</a></p>
+    </div>
+  <?php endif; ?>
+  <?php if ($counts['unread'] > 0): ?>
     <div class="alert-new">
       <p><strong>🔴 You have <?php echo $counts['unread']; ?> new message<?php echo $counts['unread'] > 1 ? 's' : ''; ?>!</strong></p>
       <p>Someone wrote to you. Tap below to read and reply.</p>
       <p><a class="btn" href="messages.php">Read New Messages →</a></p>
     </div>
-  <?php endif; ?> <?php if ($counts['new_inquiries'] === 0 && $counts['unread'] === 0): ?>
+  <?php endif; ?>
+  <?php if ($counts['new_inquiries'] === 0 && $counts['unread'] === 0): ?>
     <p class="chat-empty">✅ No new inquiries and no new messages right now.</p>
   <?php endif; ?>
 
