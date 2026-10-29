@@ -84,7 +84,7 @@ function mail_url($params) { return 'messages.php?' . http_build_query($params);
 <?php require __DIR__ . '/_menu.php'; ?>
 <section>
   <h1>💬 Messages</h1>
-  <p class="page-intro">Your inbox, like email. Pick a person on the left to read their messages, then reply on the right — the user will see your reply in their own panel.</p>
+  <p class="page-intro">Your inbox, like email — this is only for chats with people who <em>registered</em> an account. First questions from the public Contact form live in <strong>Inquiries</strong>, not here. Pick a person on the left to read their messages, then reply on the right — the user will see your reply in their own panel.</p>
   <?php if ($message): ?><p><?php echo htmlspecialchars($message); ?></p><?php endif; ?>
   <?php if (!$db): ?><p class="notice">Database not connected yet — messages will show here once the database is connected.</p><?php endif; ?>
 
