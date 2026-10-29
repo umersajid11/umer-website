@@ -473,7 +473,7 @@ img { max-width: 100%; }
   color: var(--text, #fff); background: var(--card, #1b1f3d); text-decoration: none;
   vertical-align: middle; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
 .nav-profile:hover { transform: scale(1.08); border-color: #ffd28a; background: #262a52; }
-.nav-profile svg { display: block; }
+.nav-profile svg { display: block; width: 22px; height: 22px; flex-shrink: 0; overflow: visible; }
 
 /* ================= chatbot — simple floating assistant =================
    Bottom-right bubble, closed by default so it never covers the hero.
@@ -500,3 +500,88 @@ img { max-width: 100%; }
 .chatbot-leave summary { cursor: pointer; }
 .chatbot-leave-form { display: flex; flex-direction: column; gap: .5rem; margin-top: .6rem; }
 .chatbot-leave-form input, .chatbot-leave-form textarea { width: 100%; box-sizing: border-box; }
+
+/* Admin Messages — Gmail-style inbox (v7 mail layout). Appended only;
+   existing site styles are untouched. */
+.mail-toolbar { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: 1rem 0 .6rem; }
+.mail-search { display: flex; gap: .4rem; flex: 1; min-width: 220px; }
+.mail-search input[type="search"] { flex: 1; min-width: 0; padding: .55rem .8rem; border-radius: 999px; border: 1px solid #2a2f5e; background: #0f1226; color: #fff; }
+.mail-search button { background: #ffb347; color: #1b1f3d; border: none; border-radius: 999px; padding: .55rem 1rem; font-weight: 700; cursor: pointer; }
+.mail-tabs { display: flex; gap: .4rem; margin-bottom: 1rem; border-bottom: 2px solid #2a2f5e; padding-bottom: .4rem; }
+.mail-tabs a { color: #c9cbe0; text-decoration: none; padding: .4rem .9rem; border-radius: 999px; }
+.mail-tabs a.mail-tab-active { background: #ffb347; color: #1b1f3d; font-weight: 700; }
+.mail-layout { display: grid; grid-template-columns: 360px 1fr; gap: 1rem; align-items: start; }
+.mail-inbox { background: #1b1f3d; border: 1px solid #2a2f5e; border-radius: 14px; overflow: hidden; }
+.mail-inbox-head { margin: 0; padding: .8rem 1rem; font-weight: 700; border-bottom: 1px solid #2a2f5e; }
+.mail-row { display: block; padding: .8rem 1rem; border-bottom: 1px solid #2a2f5e; color: #fff; text-decoration: none; }
+.mail-row:hover { background: #262a52; }
+.mail-row-selected { background: #2a2f5e; border-left: 4px solid #ffb347; }
+.mail-row-top { display: flex; justify-content: space-between; gap: .6rem; }
+.mail-unread { font-weight: 800; }
+.mail-row-time { color: #c9cbe0; font-size: .8rem; white-space: nowrap; }
+.mail-row-subject { display: block; color: #e8e9f2; margin-top: .2rem; }
+.mail-row-meta { display: block; color: #c9cbe0; font-size: .85rem; margin-top: .25rem; }
+.mail-reading { background: #1b1f3d; border: 1px solid #2a2f5e; border-radius: 14px; padding: 1rem; min-width: 0; }
+.mail-reading-toolbar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: .8rem; }
+.mail-reading-toolbar form button { cursor: pointer; }
+@media (max-width: 700px) {
+  .mail-layout { grid-template-columns: 1fr; }
+  .mail-reading { order: 2; }
+}
+
+/* ================= v8 — COMPLETE RESPONSIVENESS (mobile-first fixes) =================
+   One responsive block only: desktop look is untouched. These rules make
+   the site usable on a 360px phone with no horizontal scrolling. */
+@media (max-width: 900px) {
+  header { padding: 0.9rem 1.25rem; }
+  section { padding: 2.5rem 1.25rem; }
+  .hero { padding: 3rem 1.25rem 2.5rem; }
+  .hero-slider { height: clamp(260px, 40vw, 380px); }
+  .grid, .about-grid, .admin-menu-cards { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .mail-layout { grid-template-columns: 300px 1fr; }
+}
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  /* Public + admin nav: stacked, centred, wrapping — never overflowing. */
+  header { flex-direction: column; align-items: stretch; text-align: center; padding: 0.8rem 0.9rem; gap: 0.6rem; }
+  .header-brand { justify-content: center; }
+  header nav { justify-content: center; width: 100%; }
+  header nav a { padding: 0.4rem 0.65rem; font-size: 0.88rem; }
+  section { padding: 2rem 0.95rem; }
+  section h1 { font-size: 1.7rem; }
+  section h2 { font-size: 1.4rem; }
+  /* Hero slider + photo: fit width, stay centred, shorter on phones. */
+  .hero { padding: 2.5rem 0.95rem 2rem; }
+  .hero h1 { font-size: 2rem; }
+  .hero-slider { height: 220px; border-radius: 16px; }
+  .slide-text { padding: 1rem 0.9rem 2.2rem; }
+  .slide-title { font-size: 1.25rem; }
+  .slide-arrow { width: 36px; height: 36px; font-size: 1.4rem; }
+  .slide-dots { bottom: 0.6rem; }
+  .profile-photo img { width: min(240px, 82vw); height: 300px; }
+  /* Grids, chips, steps, cards, contact form: one column, full width. */
+  .grid, .about-grid, .admin-menu-cards, .stat-grid { grid-template-columns: 1fr; }
+  .skill-chips { gap: 0.5rem; }
+  .skill-chips span { padding: 0.45rem 0.85rem; font-size: 0.9rem; }
+  form input, form textarea, form select { padding: 0.75rem 0.9rem; }
+  .hero p .btn { display: block; width: 100%; margin: 0.4rem 0; }
+  /* Admin tables: scroll inside their container, never break the page. */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  th, td { padding: 0.65rem 0.75rem; }
+  td { overflow-wrap: anywhere; }
+  /* Gmail-style mail layout: search full width, list on top, reading below. */
+  .mail-toolbar { flex-direction: column; align-items: stretch; }
+  .mail-search { min-width: 0; flex-basis: 100%; }
+  .mail-tabs { flex-wrap: wrap; }
+  .mail-layout { grid-template-columns: 1fr; }
+  .mail-row { padding: 0.7rem 0.85rem; }
+  .mail-row-time { font-size: 0.75rem; }
+  .mail-reading { padding: 0.8rem; }
+  .chat-msg { max-width: 95%; }
+  /* Chatbot: panel fits a 360px screen, bubble smaller, footer kept clear. */
+  #site-chatbot { right: 12px; bottom: 12px; }
+  .chatbot-bubble { width: 48px; height: 48px; font-size: 1.3rem; }
+  .chatbot-panel { width: calc(100vw - 24px); max-width: calc(100vw - 24px); bottom: 60px; max-height: calc(100dvh - 90px); overflow-y: auto; }
+  .chatbot-messages { height: 190px; }
+  footer { padding-bottom: 4.5rem; }
+}
