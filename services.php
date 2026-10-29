@@ -33,7 +33,7 @@ $services = array_values($merged);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services — Umer Sajid</title>
 <meta name="description" content="All services by Umer Sajid — website design and fixing, video editing, voiceover and scripts, social media, logos, SEO and content writing.">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 <header>
@@ -44,7 +44,7 @@ $services = array_values($merged);
     <a href="services.php">Services</a>
     <a href="blog.php">Blog</a>
     <a href="index.php#contact">Contact</a>
-    <a href="user/login.php" class="nav-profile" title="User Panel" aria-label="User Panel"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/></svg><span class="sr-only">User Panel</span></a>
+    <a href="user/login.php" class="nav-profile" title="User Panel" aria-label="User Panel"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="7" r="4" fill="#ffffff"/><path d="M12 12c-4.4 0-8 3.1-8 7.5V21h16v-1.5C20 15.1 16.4 12 12 12z" fill="#ffffff"/></svg><span class="sr-only">User Panel</span></a>
   </nav>
 </header>
 <main>
