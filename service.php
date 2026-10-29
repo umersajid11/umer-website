@@ -17,9 +17,9 @@ if (!$service && $db) {
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo $service ? htmlspecialchars($service['title']) . ' — Umer Sajid' : 'Service not found — Umer Sajid'; ?></title>
-<link rel="stylesheet" href="css/style.css"></head>
+<link rel="stylesheet" href="css/style.css?v=8"></head>
 <body>
-<header><strong>Umer Sajid</strong><nav><a href="index.php">Home</a><a href="index.php#services">Services</a><a href="user/login.php" class="nav-profile" title="User Panel" aria-label="User Panel"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/></svg><span class="sr-only">User Panel</span></a></nav></header>
+<header><strong>Umer Sajid</strong><nav><a href="index.php">Home</a><a href="index.php#services">Services</a><a href="user/login.php" class="nav-profile" title="User Panel" aria-label="User Panel"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="7" r="4" fill="#ffffff"/><path d="M12 12c-4.4 0-8 3.1-8 7.5V21h16v-1.5C20 15.1 16.4 12 12 12z" fill="#ffffff"/></svg><span class="sr-only">User Panel</span></a></nav></header>
 <main>
 <?php if (!$service): ?>
   <section><h1>Service not found</h1><p>That service does not exist. Please choose one from the <a href="index.php#services">services list</a>.</p></section>

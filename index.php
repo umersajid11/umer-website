@@ -41,7 +41,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Umer Sajid — Personal Portfolio</title>
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 <header>
@@ -54,7 +54,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
     <a href="services.php">Services</a>
     <a href="blog.php">Blog</a>
     <a href="index.php#contact">Contact</a>
-    <a href="user/login.php" class="nav-profile" title="User Panel" aria-label="User Panel"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/></svg><span class="sr-only">User Panel</span></a>
+    <a href="user/login.php" class="nav-profile" title="User Panel" aria-label="User Panel"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="7" r="4" fill="#ffffff"/><path d="M12 12c-4.4 0-8 3.1-8 7.5V21h16v-1.5C20 15.1 16.4 12 12 12z" fill="#ffffff"/></svg><span class="sr-only">User Panel</span></a>
   </nav>
 </header>
 
@@ -102,7 +102,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
       <?php endif; ?>
       <span class="tag">Personal Portfolio</span>
       <h1><?php echo htmlspecialchars($heroTitle); ?></h1>
-      <p class="hero-credentials">MS in Software Engineering · One-year diploma from China</p>
+      <p class="hero-credentials">MS in Software Engineering · BSc in Software Engineering</p>
       <p><?php echo htmlspecialchars($heroIntro); ?></p>
       <blockquote class="motivation"><?php echo htmlspecialchars($motivationQuote); ?></blockquote>
       <p>
@@ -111,7 +111,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
       </p>
       <div class="hero-cards">
         <div class="hero-card">🎓 MS Software Engineering</div>
-        <div class="hero-card">🎓 One-year Diploma — China</div>
+        <div class="hero-card">🎓 BSc in Software Engineering</div>
         <div class="hero-card">🎬 Video &amp; Voiceover</div>
         <div class="hero-card">🌐 Websites</div>
       </div>
@@ -214,7 +214,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 </main>
 
 <footer>
-  <p>© Umer Sajid · MS Software Engineering · One-year diploma from China</p>
+  <p>© Umer Sajid · MS Software Engineering · BSc in Software Engineering</p>
   <p><a href="about.php">About</a> · <a href="services.php">Services</a> · <a href="blog.php">Blog</a> · <a href="user/login.php">User Panel</a></p>
   <p class="footer-admin"><a href="admin/login.php">Admin</a></p>
 </footer>
