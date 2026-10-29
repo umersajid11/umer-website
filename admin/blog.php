@@ -23,7 +23,7 @@ $posts = get_all_posts($db);
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog Manager — Admin</title><link rel="stylesheet" href="../css/style.css?v=4"></head>
+<title>Blog Manager — Admin</title><link rel="stylesheet" href="../css/style.css?v=8"></head>
 <body>
 <?php require __DIR__ . '/_menu.php'; ?>
 <section>
@@ -53,6 +53,20 @@ $posts = get_all_posts($db);
   </form>
   </div>
 
+  <?php
+  $confirmDelete = null;
+  if (isset($_GET['delete_confirm']) && $db) {
+      foreach ($posts as $pp) { if ((int) $pp['id'] === (int) $_GET['delete_confirm']) { $confirmDelete = $pp; break; } }
+  }
+  if ($confirmDelete): ?>
+  <div class="admin-section">
+  <h2>Delete this post?</h2>
+  <p><strong><?php echo htmlspecialchars($confirmDelete['title']); ?></strong> — this cannot be undone.</p>
+  <form method="post" style="display:inline"><input type="hidden" name="delete_post" value="1"><input type="hidden" name="id" value="<?php echo (int) $confirmDelete['id']; ?>"><button type="submit">Yes, delete this post</button></form>
+  <a class="btn btn-outline" href="blog.php">Cancel</a>
+  </div>
+  <?php endif; ?>
+
   <div class="admin-section">
   <h2>All Posts (<?php echo count($posts); ?>)</h2>
   <?php if (empty($posts)): ?><p>No posts yet — write your first one above.</p><?php else: ?>
@@ -65,7 +79,7 @@ $posts = get_all_posts($db);
           <td>
             <a href="blog.php?edit=<?php echo (int) $p['id']; ?>">Edit</a>
             <?php if ($p['status'] === 'published'): ?> · <a href="../blog-post.php?slug=<?php echo urlencode($p['slug']); ?>">View</a><?php endif; ?>
-            <form method="post" style="display:inline" onsubmit="return confirm('Delete this post? This cannot be undone.');"><input type="hidden" name="delete_post" value="1"><input type="hidden" name="id" value="<?php echo (int) $p['id']; ?>"><button type="submit">Delete</button></form>
+            <a href="blog.php?delete_confirm=<?php echo (int) $p['id']; ?>">Delete</a>
           </td>
         </tr>
       <?php endforeach; ?>
