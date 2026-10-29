@@ -41,7 +41,7 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Umer Sajid — Personal Portfolio</title>
-<link rel="stylesheet" href="css/style.css?v=8">
+<link rel="stylesheet" href="css/style.css?v=10">
 </head>
 <body>
 <header>
@@ -174,11 +174,12 @@ $hasPhoto = file_exists(__DIR__ . '/' . $profilePhoto);
 
   <section id="contact">
     <h2>Contact / Inquiry</h2>
-    <p><?php echo htmlspecialchars($contactNotice); ?></p>
+    <p><?php echo htmlspecialchars($contactNotice); ?></p>       <p class="muted">No account needed — just ask your question here. It goes straight to the admin's Inquiries. If you want the admin's reply to appear in your own panel, register in the User Panel with this same email address.</p>
     <form method="post" action="index.php#contact">
       <label>Name <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
       <label>Service
+          
         <select name="service">
           <option value="">— Choose a service —</option>
           <?php foreach (service_catalogue() as $slug => $s): ?>
