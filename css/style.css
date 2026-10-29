@@ -333,7 +333,7 @@ header nav a.nav-cta:hover { background: var(--accent-soft); color: #1a1a1a; }
 .bar-fill { height: 100%; background: var(--accent); }
 .bar-blue { background: var(--accent2); }
 .badge { display: inline-block; padding: 0.15rem 0.7rem; border-radius: 999px; font-size: 0.85rem; font-weight: 700; background: var(--card-2); color: var(--text); }
-.badge-contacted { background: #244a6b; } .badge-done { background: #1f5c3d; } .badge-new { background: #5c4a00; }
+.badge-contacted { background: #244a6b; } .badge-emailed { background: #7a5a00; } .badge-done { background: #1f5c3d; } .badge-new { background: #5c4a00; }
 .chat { display: flex; flex-direction: column; gap: 0.8rem; margin: 1rem 0; }
 .chat-msg { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; max-width: 85%; }
 .chat-msg p { margin: 0.3rem 0 0; color: var(--text); }
@@ -584,4 +584,24 @@ img { max-width: 100%; }
   .chatbot-panel { width: calc(100vw - 24px); max-width: calc(100vw - 24px); bottom: 60px; max-height: calc(100dvh - 90px); overflow-y: auto; }
   .chatbot-messages { height: 190px; }
   footer { padding-bottom: 4.5rem; }
+}
+
+/* ================= v9.2 — front-page photo: blue-ringed circle =================
+   Overrides the old rounded-rectangle photo (v3). The photo is now a
+   circle with a blue ring that matches the site's blue theme, plus a
+   soft blue glow, so it stands out on the dark navy hero background.
+   Appended last, so it wins over earlier .profile-photo rules. */
+.profile-photo img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
+  padding: 0;
+  background: #1b1f3d;
+  border: 4px solid #6c9bff;
+  box-shadow: 0 0 0 6px rgba(108,155,255,0.25), 0 20px 44px rgba(0,0,0,0.5);
+}
+@media (max-width: 720px) {
+  .profile-photo img { width: 180px; height: 180px; }
 }
