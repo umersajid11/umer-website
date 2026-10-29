@@ -333,7 +333,7 @@ header nav a.nav-cta:hover { background: var(--accent-soft); color: #1a1a1a; }
 .bar-fill { height: 100%; background: var(--accent); }
 .bar-blue { background: var(--accent2); }
 .badge { display: inline-block; padding: 0.15rem 0.7rem; border-radius: 999px; font-size: 0.85rem; font-weight: 700; background: var(--card-2); color: var(--text); }
-..badge-contacted { background: #244a6b; } .badge-emailed { background: #7a5a00; } .badge-done { background: #1f5c3d; } .badge-new { background: #5c4a00; }
+.badge-contacted { background: #244a6b; } .badge-emailed { background: #7a5a00; } .badge-done { background: #1f5c3d; } .badge-new { background: #5c4a00; }
 .chat { display: flex; flex-direction: column; gap: 0.8rem; margin: 1rem 0; }
 .chat-msg { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; max-width: 85%; }
 .chat-msg p { margin: 0.3rem 0 0; color: var(--text); }
