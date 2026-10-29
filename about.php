@@ -87,7 +87,7 @@ $motivationQuote = get_site_setting($db, 'motivation_quote');
 
     <p class="about-links">
       <a href="https://linkedin.com/umersajid">LinkedIn</a> ·
-      <a href="https://www.facebook.com/profile.php?id=61595644480292">Facebook</a> ·
+      <a href="https://www.facebook.com/umermughal11">Facebook</a> ·
       <a href="https://www.instagram.com/ii_umermughal/">Instagram</a>
     </p>
     <p><a class="btn" href="index.php#contact">Work With Me</a></p>
